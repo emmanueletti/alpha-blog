@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   # routes for interacting with existing database resources referenced via a symbol.
   # Need to have the symbol be of a resource already created in the db schema and
   # managed via a model file in the model folder.
-  # Can select just the routes needed by adding only: [:ROUTE_CONTROLLER_ACTION_ NAME]
+  # Can select just the routes needed by adding only: [:ROUTE_CONTROLLER_ACTION_NAME]
   # e.g resources :articles, only: [:show]
   # Can see the routes by running "rails routes --expanded" in the terminal.
-  resources :articles, only: [:show]
+  resources :articles, only: %i[show index]
 end
