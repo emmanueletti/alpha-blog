@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # Can select just the routes needed by adding only: [:ROUTE_CONTROLLER_ACTION_NAME]
   # e.g resources :articles, only: [:show]
   # Can see the routes by running "rails routes --expanded" in the terminal.
-  resources :articles, only: %i[show index]
+  resources :articles, only: %i[show index new create]
 end
