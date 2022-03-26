@@ -16,6 +16,9 @@ class ArticlesController < ApplicationController
     # its needed
 
     # ALSO it seems that the implicit return of controller actions is a view
+
+    # params hash is passed to method from the route
+    # can always pause execution with debugger and print out what the params hash looks like
     @article = Article.find(params[:id])
   end
 
@@ -23,7 +26,14 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
-  def new; end
+  def new
+    # need to create an empty article instance variable to pass to the "new.html.erb"
+    # view so it doesnt error out.
+    # the only place that instance variable gets naturally created is in the
+    # create method, where we check for errors if the instance variable created
+    # fails to save
+    @article = Article.new
+  end
 
   def create
     # you can pass the entire articles hash found within the params hash and
@@ -37,18 +47,49 @@ class ArticlesController < ApplicationController
     # will use the below code, which says
     # require the top level key of :article, then permit the :title and :description
     # values from that key to be used in instantiating the Article object
-    @article = Article.new(params.require(:articles).permit(:title, :description))
+    @article = Article.new(params.require(:article).permit(:title, :description))
 
     # Also cool - RAILS behind the scenes sanitizes user input before saving into the db
     # to prevent SQL injection attacks
-    @article.save
+    if @article.save
 
-    # RAILS will auto-magically pull out the id from the now saved @article instance object
-    # and pass that to the article_path which is a shorthand for the actual HTTP route
-    # for the displaying of the particle article (/article/:id)
-    # redirect_to article_path(@article)
+      # flash is a special has that can be loaded key keys "notice" or "alert"
+      # used for global view messaging in the main application.html.erb file
+      flash[:notice] = 'Article was created successfully.'
 
-    # EVEN MORE RAILS MAGIC - short cut for redirect_to article_path(@article) below
-    redirect_to @article
+      # RAILS will auto-magically pull out the id from the now saved @article instance object
+      # and pass that to the article_path which is a shorthand for the actual HTTP route
+      # for the displaying of the particle article (/article/:id)
+      # redirect_to article_path(@article)
+
+      # EVEN MORE RAILS MAGIC - short cut for redirect_to article_path(@article) below
+      redirect_to @article
+    else
+      # render the new.html.erb template
+      # apparently this pattern no longer works  in new rails:
+      # https://github.com/hotwired/turbo-rails/issues/12
+      render 'new'
+    end
+  end
+
+  # the edit form
+  def edit
+    # find the article we want to pass to the view for field population
+    @article = Article.find(params[:id])
+  end
+
+  # the endpoint to actually edit a database record
+  def update
+    # first find the article we want to edit
+    @article = Article.find(params[:id])
+    # whitelist and use the fields we need
+    result = @article.update(params.require(:article).permit(:title, :description))
+
+    if result
+      flash[:notice] = 'Article was edited successfully'
+      redirect_to @article
+    else
+      render 'edit'
+    end
   end
 end
