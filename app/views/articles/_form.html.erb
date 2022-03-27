@@ -1,0 +1,22 @@
+<% if @article.errors.any? %>
+  <h2>The following errors prevented the article from being saved</h2>
+  <ul>
+    <% @article.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%# RAILS magic, it knows that we are in the edit form of an edit route in an
+edit action, so by just telling it the model we are working with, RAILS will
+auto populate the fields with the particle id passed in from the route params %>
+<%= form_with(model: @article, local: true)  do |field| %>
+  <p>
+    <%= field.label :title %>  <br>
+    <%= field.text_field :title %>
+  </p>
+  <p>
+    <%= field.label :description %>  <br>
+    <%= field.text_area :description %>
+  </p>
+  <p><%= field.submit %></p>
+<% end %>

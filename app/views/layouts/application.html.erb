@@ -9,9 +9,8 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <% flash.each do |name, message| %>
-      <%= message %>
-    <% end%>
+    <%# dont need to put the underscore when refering to partials %>
+    <%= render "layouts/messages"%>
     <%= yield %>
   </body>
 </html>

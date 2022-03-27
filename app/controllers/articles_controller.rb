@@ -2,6 +2,10 @@
 # in the application_controller.rb file
 
 class ArticlesController < ApplicationController
+  # define method to run before other specified methods
+  # if specified methods is empty, then will run before all methods
+  before_action :find_article_by_param_id, only: %i[show edit update destroy]
+
   def show
     # the @ in front converts the articles variable from a regular variable
     # inside this show method to an instance variable inside the ArticlesController
@@ -19,7 +23,7 @@ class ArticlesController < ApplicationController
 
     # params hash is passed to method from the route
     # can always pause execution with debugger and print out what the params hash looks like
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   def index
@@ -47,7 +51,7 @@ class ArticlesController < ApplicationController
     # will use the below code, which says
     # require the top level key of :article, then permit the :title and :description
     # values from that key to be used in instantiating the Article object
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(params.require(:articles).permit(:title, :description))
 
     # Also cool - RAILS behind the scenes sanitizes user input before saving into the db
     # to prevent SQL injection attacks
@@ -67,6 +71,8 @@ class ArticlesController < ApplicationController
     else
       # render the new.html.erb template
       # apparently this pattern no longer works  in new rails:
+      # turbo does not allow for rendered html as an immediate action of a form
+      # submit - instead it wants a redirect
       # https://github.com/hotwired/turbo-rails/issues/12
       render 'new'
     end
@@ -75,13 +81,14 @@ class ArticlesController < ApplicationController
   # the edit form
   def edit
     # find the article we want to pass to the view for field population
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   # the endpoint to actually edit a database record
   def update
     # first find the article we want to edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
+
     # whitelist and use the fields we need
     result = @article.update(params.require(:article).permit(:title, :description))
 
@@ -94,8 +101,16 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
     @article.destroy
     redirect_to articles_path
+  end
+
+  # anything below this "private" label will only be accessible inside this class
+  private
+
+  # creating a reuseable method to re-use logic
+  def find_article_by_param_id
+    @article = Article.find(params[:id])
   end
 end

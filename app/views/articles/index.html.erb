@@ -5,7 +5,7 @@
       <th>Id</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Actions</th>
+      <th colspan="3" >Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -27,9 +27,11 @@
         <%# third item is the path that the link will go to %>
         <%# fourth item is the method, without it the default is :get %>
         <%# specifify :delete, will make it ultimately route to destroy action in controller %>
-        <td><%= button_to 'Delete', article_path(article), method: :delete %></td>
+        <%# fifth item is a data hash that can contain a confirm message - does not work in rails 6 %>
+        <%# https://discuss.hotwired.dev/t/button-to-not-showing-the-data-confirm/2046/2 %>
+        <td><%= button_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?"} %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<h3><%= link_to 'Create New Article', new_article_path %></h3>
+<p><%= link_to 'Create New Article', new_article_path %></p>
