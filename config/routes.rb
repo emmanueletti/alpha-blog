@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root 'articles#index'
+  root 'pages#home'
 
   # "resources" syntax is a shortcut parsed by RAILS to give us all the relevant CRUD
   # routes for interacting with existing database resources referenced via a symbol.
