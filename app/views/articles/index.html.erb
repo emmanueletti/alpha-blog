@@ -31,7 +31,8 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-        2 days ago
+        <%# RAILS MAGIC: helper function for displaying human readable time %>
+        <small>Created <%= time_ago_in_words(article.created_at) %>, edited <%= time_ago_in_words(article.updated_at) %></small>
       </div>
     </div>
   <% end %>
