@@ -1,0 +1,22 @@
+.jumbotron {
+  /* how to refence assets */
+  background-image: url('assets/hero-image.jpeg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+footer.sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#page-content {
+  background-position: whitesmoke;
+}
