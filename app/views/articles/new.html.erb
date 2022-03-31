@@ -1,13 +1,6 @@
 <div id="page-content" class="container-lg mt-4">
   <h1 class="text-center" >Create New Article</h1>
-  <% if @article.errors.any? %>
-    <h2>The following errors prevented the article from being saved</h2>
-    <ul>
-      <% @article.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%= render "shared/errors" %>
   <%# using RAILS built in abstraction for forms (...wow!) %>
   <%# the form_with specific abstraction submits its data via AJAX, we can override
   that to get the standard form submit behavior (using local: true flag) - page reload,
