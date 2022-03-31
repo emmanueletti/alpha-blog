@@ -1,40 +1,38 @@
-<div id="page-content " class="container-lg mt-4">
-  <h1 class="text-center" >Listing All Articles</h1>
-  <% @articles.each do |article| %>
-    <div class="card text-center m-4 shadow mb-5 bg-body rounded">
-      <div class="card-header font-italic">
-        By creators name
-      </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
-        <%# RAILS MAGIC: truncate function to add word limits %>
-        <p class="card-text"><%= truncate(article.description, length: 100) %></p>
-        <div class="d-flex justify-content-between w-25 mx-auto">
-          <%# Links %>
-          <%# need to provide the id for the particular article for the paths / routes
+<h1 class="text-center" >Listing All Articles</h1>
+<% @articles.each do |article| %>
+  <div class="card text-center m-4 shadow mb-5 bg-body rounded">
+    <div class="card-header font-italic">
+      By creators name
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
+      <%# RAILS MAGIC: truncate function to add word limits %>
+      <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+      <div class="d-flex justify-content-between w-25 mx-auto">
+        <%# Links %>
+        <%# need to provide the id for the particular article for the paths / routes
           that require an id param %>
-          <%= link_to 'Show', article_path(article.id), class: "btn btn-outline-primary" %>
-          <%# RAILS MAGIC: rails is smart enough to pull out the id if you give it
+        <%= link_to 'Show', article_path(article.id), class: "btn btn-outline-primary" %>
+        <%# RAILS MAGIC: rails is smart enough to pull out the id if you give it
           the entire article object %>
-          <%# this id will then be passed to the route as a GET request param %>
-          <%= link_to 'Edit', edit_article_path(article), class: "btn btn-outline-info" %>
-          <%# to create links start with "link_to" %>
-          <%# SIDE NOTE: switching from link_to to button_to for delete made it work %>
-          <%# https://stackoverflow.com/questions/12997167/ruby-on-rails-link-to-delete-method-not-working %>
-          <%# second item to pass in is the text that will be shown: "Delete" %>
-          <%# third item is the path that the link will go to %>
-          <%# fourth item is the method, without it the default is :get %>
-          <%# specifify :delete, will make it ultimately route to destroy action in controller %>
-          <%# fifth item is a data hash that can contain a confirm message - does not work in rails 6 %>
-          <%# https://discuss.hotwired.dev/t/button-to-not-showing-the-data-confirm/2046/2 %>
-          <%= button_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
-        </div>
-      </div>
-      <div class="card-footer text-muted">
-        <%# RAILS MAGIC: helper function for displaying human readable time %>
-        <small>Created <%= time_ago_in_words(article.created_at) %>, edited <%= time_ago_in_words(article.updated_at) %></small>
+        <%# this id will then be passed to the route as a GET request param %>
+        <%= link_to 'Edit', edit_article_path(article), class: "btn btn-outline-info" %>
+        <%# to create links start with "link_to" %>
+        <%# SIDE NOTE: switching from link_to to button_to for delete made it work %>
+        <%# https://stackoverflow.com/questions/12997167/ruby-on-rails-link-to-delete-method-not-working %>
+        <%# second item to pass in is the text that will be shown: "Delete" %>
+        <%# third item is the path that the link will go to %>
+        <%# fourth item is the method, without it the default is :get %>
+        <%# specifify :delete, will make it ultimately route to destroy action in controller %>
+        <%# fifth item is a data hash that can contain a confirm message - does not work in rails 6 %>
+        <%# https://discuss.hotwired.dev/t/button-to-not-showing-the-data-confirm/2046/2 %>
+        <%= button_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
       </div>
     </div>
-  <% end %>
-  <p><%= link_to 'Create New Article', new_article_path %></p>
-</div>
+    <div class="card-footer text-muted">
+      <%# RAILS MAGIC: helper function for displaying human readable time %>
+      <small>Created <%= time_ago_in_words(article.created_at) %>, edited <%= time_ago_in_words(article.updated_at) %></small>
+    </div>
+  </div>
+<% end %>
+<p><%= link_to 'Create New Article', new_article_path %></p>

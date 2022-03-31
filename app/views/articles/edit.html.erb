@@ -1,9 +1,7 @@
-<div class="container-lg" id="page-content">
-  <h1 class="text-center" >Edit Article</h1>
-  <%# since the partial is in the same place as this template that uses it
+<h1 class="text-center" >Edit Article</h1>
+<%# since the partial is in the same place as this template that uses it
   we don't need to specify the full path. can just use the name without the underscore
   BUT: in layouts folder, will need to specify the full path
   %>
-  <%= render "form"%>
-  <%= link_to "Cancel Edit and Return to Articles Listing", articles_path %> |
-</div>
+<%= render "form"%>
+<%= link_to "Cancel Edit and Return to Articles Listing", articles_path %> |
