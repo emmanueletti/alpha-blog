@@ -6,6 +6,8 @@
 # We add constraints to how this model can be used and the database records that
 # can be created using this class
 class Article < ApplicationRecord
+  belongs_to :user
+  
   # Rails validation syntax to add contraints to the creation of new article
   # records in the database
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
