@@ -14,4 +14,8 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
 
   before_save { self.email = email.downcase }
+  # RAILS MAGIC
+  # uncomment bcrypt and install it, then add this line to get hashed passwords
+  # read the documentation of "has_secure_password" to get the full instructions
+  has_secure_password
 end
