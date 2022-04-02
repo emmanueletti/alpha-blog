@@ -13,4 +13,12 @@ Rails.application.routes.draw do
 
   # to see all current routes in the app run "rails routes --expanded" in the terminal.
   resources :articles
+
+  # interpretation - GET request method, path 'signup', goes to 'new' method in
+  # 'users' controller
+  get '/signup', to: 'users#new'
+  # since we already defined the new route, we can tell Rails not to create it in
+  # its resources short hand
+  resources :user, except: [:new]
+  # post '/users', to: 'users#create'
 end

@@ -1,0 +1,27 @@
+<%= form_with model: @users do |field| %>
+  <div class="mb-3">
+    <%= field.label :username, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= field.text_field :username, class:"form-control", placeholder: "Username" %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <%= field.label :email, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= field.email_field :email, class:"form-control", placeholder: "Enter your email address" %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <%= field.label :password, class: "col-sm-2 col-form-label" %>
+    <div class="col-10">
+      <%= field.password_field :password, class:"form-control", placeholder: "Choose a password" %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="col-sm-10">
+      <%# NOTE field.submit does not use a comma to seperate the class %>
+      <%# a comma will cause an error %>
+      <%= field.submit class:"btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
