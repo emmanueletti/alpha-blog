@@ -9,20 +9,20 @@ class ArticlesController < ApplicationController
   def show
     # the @ in front converts the articles variable from a regular variable
     # inside this show method to an instance variable inside the ArticlesController
-    # class. This instance variable will be be exposed to RAILS when the ArticlesController
-    # gets instantiated bY RAILS, and can then be passed to other places in the
-    # app (by RAILS) such as the show.html.erb view file
+    # class which can be accessed by other methods, internal RAILS views builders, etc..
+    # This instance variable will be be exposed to RAILS internal processes when the ArticlesController class
+    # gets instantiated by RAILS, and can then be passed to other places in the
+    # app (by RAILS) such as the show.html.erb view file which itself accesses "@articles" instance variable
 
     # Also the last line in a ruby function / method is implicitly  returned.
-    # My guess is that RAILS is instantiating this class, calling the show method
-    # expecting an instance of the class with methods/getters/setters for managing
-    # the database as the return value, then passing that return value to where
-    # its needed
-
-    # ALSO it seems that the implicit return of controller actions is a view
+    # BUT guess is that RAILS is instantiating this class, calling the show method
+    # which will assign create an "@article" instance variable in the class that all other methods
+    # and views will have access to
 
     # params hash is passed to method from the route
     # can always pause execution with debugger and print out what the params hash looks like
+
+    # commented out b/c we no longer need this line with the addition of the before_action
     # @article = Article.find(params[:id])
   end
 
