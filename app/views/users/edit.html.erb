@@ -1,0 +1,27 @@
+<div class="container-md">
+  <%= form_with model: @user do |field| %>
+    <div class="mb-3">
+      <%= field.label :username, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= field.text_field :username, class:"form-control", placeholder: "Username" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= field.label :email, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= field.email_field :email, class:"form-control", placeholder: "Enter your email address" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= field.label :password, class: "col-sm-2 col-form-label" %>
+      <div class="col-10">
+        <%= field.password_field :password, class:"form-control", placeholder: "Choose a password" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="col-sm-10">
+        <%= field.submit class:"btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

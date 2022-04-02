@@ -85,6 +85,8 @@ class ArticlesController < ApplicationController
   # the edit form
   def edit
     # find the article we want to pass to the view for field population
+    # we don't need to explicility repeat this find logic after consolidating it to
+    # the re-useable find_article_by_param_id
     # @article = Article.find(params[:id])
   end
 
