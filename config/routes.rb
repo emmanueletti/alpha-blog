@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   # since we already defined the new route, we can tell Rails not to create it in
   # its resources short hand
-  resources :user, except: [:new]
+  resources :users, except: [:new]
   # post '/users', to: 'users#create'
 end
