@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   # its resources short hand
   resources :users, except: [:new]
   # post '/users', to: 'users#create'
+
+  # login sessions does not have anything to do with the database so does not
+  # have to use RESTful convention - here we make up combinations of methods and routes
+  get '/login', to: 'sessions#new' # the login form
+  post '/login', to: 'sessions#create' # handles login form submission
+  delete '/logout', to: 'sessions#destroy' # handles login out
 end
