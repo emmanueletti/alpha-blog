@@ -1,4 +1,7 @@
 <h1 class="text-center" >Alpha Bloggers</h1>
+<div class="apple_pagination">
+  <%= will_paginate @articles, :container => false %>
+</div>
 <%# loop through all users and create a card for eachs %>
 <% for user in @users %>
   <div class="card text-center m-4 shadow mb-5 bg-body rounded">
@@ -20,3 +23,6 @@
     </div>
   </div>
 <% end %>
+<div class="apple_pagination">
+  <%= will_paginate @articles, :container => false %>
+</div>

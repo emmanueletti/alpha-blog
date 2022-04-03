@@ -27,7 +27,9 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all
+    # @articles = Article.all
+    # replaced the above with below for pagination - https://github.com/mislav/will_paginate
+    @articles = Article.paginate(page: params[:page], per_page: 2)
   end
 
   def new
