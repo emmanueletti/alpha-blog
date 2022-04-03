@@ -1,0 +1,22 @@
+<h1 class="text-center" >Alpha Bloggers</h1>
+<%# loop through all users and create a card for eachs %>
+<% for user in @users %>
+  <div class="card text-center m-4 shadow mb-5 bg-body rounded">
+    <div class="card-header font-italic">
+      <%= user.username %>
+    </div>
+    <div class="card-body">
+      <%= gravatar_for(user, options: {size: 200, class_string: "rounded shadow mx-auto d-block"}) %>
+      <%# RAILS MAGIC: pluralize helper method helps plularize words based on the count %>
+      <div class="card-text"><%= pluralize(user.articles.count, "Article") %> </div>
+      <div class="d-flex justify-content-between w-25 mx-auto">
+        <%= link_to 'View Profile', user_path(user), class: "btn btn-outline-info" %>
+        <%= link_to 'Edit Profile', edit_user_path(user), class: "btn btn-outline-info" %>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <%# RAILS MAGIC: helper function for displaying human readable time %>
+      <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
+    </div>
+  </div>
+<% end %>
