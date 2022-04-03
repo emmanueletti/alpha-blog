@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
         # https://guides.rubyonrails.org/action_controller_overview.html#session
         session[:user_id] = user.id
         flash[:notice] = 'Logged in successfully'
-        redirect_to user
+        format.html { redirect_to user, status: 303 }
+
       else
         flash.now[:alert] = 'There was something wrong with your login details'
         format.html { render :new, status: :unprocessable_entity }

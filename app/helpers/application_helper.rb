@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # these methods are only available to the views
   # custom helper definition
   # setting "options" configuration argument's size attribute with a default value
   def gravatar_for(user, options: { size: 80, class_string: '' })

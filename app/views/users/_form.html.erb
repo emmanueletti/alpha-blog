@@ -23,7 +23,7 @@
       <%# a comma will cause an error %>
       <%# eg:  field.submit class:"btn btn-primary" %>
       <%# Only have a comma if a custom name is given to the button %>
-      <%= field.submit (@user.new_record? ? "Sign Up": "Update account", class:"btn btn-primary") %>
+      <%= field.submit "Sign Up", class:"btn btn-primary" %>
     </div>
   </div>
 <% end %>

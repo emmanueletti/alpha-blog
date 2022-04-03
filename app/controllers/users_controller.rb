@@ -7,10 +7,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = "welcome to the Alpha blog #{@user.username}, you have successfully created an account"
-    else
-      render 'new'
+    respond_to do |format|
+      if @user.save
+        flash[:notice] = "welcome to the Alpha blog #{@user.username}, you have successfully created an account"
+        # the code to "sign a user in" is to fill the RAILS "session" object with the user_id
+        session[:user_id] = @user.id
+        format.html { redirect_to user_path(@user) }
+      else
+        render 'new'
+      end
     end
   end
 

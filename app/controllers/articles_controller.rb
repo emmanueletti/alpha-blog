@@ -55,9 +55,7 @@ class ArticlesController < ApplicationController
     # values from that key to be used in instantiating the Article object
     @article = Article.new(params.require(:articles).permit(:title, :description))
 
-    # temporary workaround till authentication system is created
-    # hardcoding a user association
-    @article.user = User.first
+    @article.user = current_user
 
     # Also cool - RAILS behind the scenes sanitizes user input before saving into the db
     # to prevent SQL injection attacks
