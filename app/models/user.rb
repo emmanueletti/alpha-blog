@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # association declations
-  has_many :articles
+  # dependet: :destroy -> gives instructions to Rails as to what to do to dependent associations if a user is destroyed
+  has_many :articles, dependent: :destroy
 
   # uniqueness is case sensitive by default - so "aaa" will be seen as different from "Aaa"
   # can turn it off by setting case sensitivity to false

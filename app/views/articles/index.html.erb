@@ -29,7 +29,7 @@
           <%# third item is the path that the link will go to %>
           <%# fourth item is the method, without it the default is :get %>
           <%# specifify :delete, will make it ultimately route to destroy action in controller %>
-          <%# fifth item is a data hash that can contain a confirm message - does not work in rails 6 %>
+          <%# fifth item is a data hash that can contain a confirm message - does not seem to work in rails 7 %>
           <%# https://discuss.hotwired.dev/t/button-to-not-showing-the-data-confirm/2046/2 %>
           <%= button_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
         <% end %>

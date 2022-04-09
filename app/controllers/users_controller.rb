@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user_by_param_id, only: %i[show edit update destroy]
-  before_action :require_user_logged_in, except: %i[show index] # defined in the parent ApplicationController
+  before_action :require_user_logged_in, except: %i[show index create new] # defined in the parent ApplicationController
   before_action :require_access_to_profile, only: %i[edit destroy update]
 
   def new
@@ -39,6 +39,14 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @users = User.paginate(page: params[:page], per_page: 2)
+  end
+
+  def destroy
+    @user.destroy
+    # reset session to auto log out user in Rails
+    session[:user_id] = nil
+    flash[:notice] = 'Account and all associated articles successfully deleted'
+    redirect_to root_path
   end
 
   private
