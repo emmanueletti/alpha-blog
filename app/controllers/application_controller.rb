@@ -17,4 +17,11 @@ class ApplicationController < ActionController::Base
     # https://stackoverflow.com/questions/3994033/ruby-operator-a-k-a-the-double-bang
     !!current_user
   end
+
+  def require_user_logged_in
+    return if logged_in?
+
+    flash[:alert] = 'You must be logged in to perform that action'
+    redirect_to login_path
+  end
 end

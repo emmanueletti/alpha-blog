@@ -30,14 +30,32 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><%= link_to "View Articles", articles_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Create New Article", new_article_path, class: "dropdown-item" %></li>
+            <% if logged_in? %>
+              <li><%= link_to "Create New Article", new_article_path, class: "dropdown-item" %></li>
+            <% end %>
           </ul>
         </li>
         <%# session helper %>
         <% if logged_in? %>
           <li class="nav-item">
+            <%# <%= link_to current_user.username, user_path(current_user.id), class: "nav-link" %> %>
+            <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
             <%# current_user if a function that returns a user object and thus is chainable %>
-            <%= link_to current_user.username, user_path(current_user.id), class: "nav-link" %>
+              Profile [<%= current_user.username %>]
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to "View Your Profile", user_path(current_user), class: "dropdown-item" %></li>
+              <li><%= link_to "Edit Your Profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+            </ul>
+          </li>
           </li>
           <li class="nav-item">
             <%= link_to "Logout", logout_path, data: { "turbo-method": :delete }, class: "nav-link" %>

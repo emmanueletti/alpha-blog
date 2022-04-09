@@ -6,6 +6,11 @@ class ArticlesController < ApplicationController
   # if specified methods is empty, then will run before all methods
   before_action :find_article_by_param_id, only: %i[show edit update destroy]
 
+  # guarding protected routes, the order matters
+  # first users logged in status will be checked, the specific access will be checked
+  before_action :require_user_logged_in, except: %i[show index] # defined in the parent ApplicationController
+  before_action :require_access_to_article, only: %i[edit destroy update]
+
   def show
     # the @ in front converts the articles variable from a regular variable
     # inside this show method to an instance variable inside the ArticlesController
@@ -118,5 +123,15 @@ class ArticlesController < ApplicationController
   # creating a reuseable method to re-use logic
   def find_article_by_param_id
     @article = Article.find(params[:id])
+  end
+
+  def require_access_to_article
+    # check if @article was created by the current user
+    has_access = @article.user == current_user
+    return if has_access
+
+    # if not created by the current user redirect
+    flash[:alert] = 'You can only edit or delete your article'
+    redirect_to articles_path
   end
 end

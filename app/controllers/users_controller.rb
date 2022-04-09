@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user_by_param_id, only: %i[show edit update destroy]
+  before_action :require_user_logged_in, except: %i[show index] # defined in the parent ApplicationController
+  before_action :require_access_to_profile, only: %i[edit destroy update]
 
   def new
     @user = User.new
@@ -47,5 +49,15 @@ class UsersController < ApplicationController
 
   def find_user_by_param_id
     @user = User.find(params[:id])
+  end
+
+  def require_access_to_profile
+    # check if @article was created by the current user
+    has_access = @user == current_user
+    return if has_access
+
+    # if not created by the current user redirect
+    flash[:alert] = 'You can only edit or delete your own profile'
+    redirect_to users_path
   end
 end
