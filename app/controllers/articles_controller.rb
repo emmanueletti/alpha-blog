@@ -126,8 +126,8 @@ class ArticlesController < ApplicationController
   end
 
   def require_access_to_article
-    # check if @article was created by the current user
-    has_access = @article.user == current_user
+    # check if @article was created by the current user or the user is admin
+    has_access = @article.user == current_user || current_user.admin?
     return if has_access
 
     # if not created by the current user redirect

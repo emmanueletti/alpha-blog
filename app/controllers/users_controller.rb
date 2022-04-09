@@ -44,7 +44,8 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     # reset session to auto log out user in Rails
-    session[:user_id] = nil
+    session[:user_id] = nil if @user == current_user # this allows for admin accounts to delete other
+    # peoples accounts and not get auto logged out after the delete
     flash[:notice] = 'Account and all associated articles successfully deleted'
     redirect_to root_path
   end
@@ -60,8 +61,8 @@ class UsersController < ApplicationController
   end
 
   def require_access_to_profile
-    # check if @article was created by the current user
-    has_access = @user == current_user
+    # check if @article was created by the current user or user is an admin
+    has_access = @user == current_user || user.admin?
     return if has_access
 
     # if not created by the current user redirect

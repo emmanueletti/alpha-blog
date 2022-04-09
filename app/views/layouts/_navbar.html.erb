@@ -49,7 +49,7 @@
               aria-expanded="false"
             >
             <%# current_user if a function that returns a user object and thus is chainable %>
-              Profile [<%= current_user.username %>]
+              <%= "(Admin)" if current_user.admin? %> Profile [<%= current_user.username %>]
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><%= link_to "View Your Profile", user_path(current_user), class: "dropdown-item" %></li>
