@@ -1,0 +1,17 @@
+<div class="container-md">
+  <h1 class="text-center mt-4">Create A New Category</h1>
+  <%# seems like form only works if you explicitly state the url %>
+  <%= form_with model: @category, url: categories_path, status: :unprocessable_entity do |field| %>
+    <div class="mb-3">
+      <%= field.label :name, "Category Name", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= field.text_field :name, class:"form-control", placeholder: "Name" %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="col-sm-10">
+        <%= field.submit "Create Category", class:"btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

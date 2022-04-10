@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new' # the login form
   post '/login', to: 'sessions#create' # handles login form submission
   delete '/logout', to: 'sessions#destroy' # handles login out
+
+  resources :categories, except: [:destroy]
 end
