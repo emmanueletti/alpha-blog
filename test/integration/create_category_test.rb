@@ -8,6 +8,11 @@ require 'test_helper'
 # I prefer using the brackets / parans than the Rails and Ruby convention of not
 # using them
 class CreateCategoryTest < ActionDispatch::IntegrationTest
+  setup do
+    @admin_user = User.create(username: 'johndoe', email: 'johndoe@email.com', password: 'password', admin: true)
+    sign_in_as(@admin_user)
+  end
+
   test 'get the new category form and create category' do
     get('/categories/new') # alternative way would be to just put the shorthand "categories_path"
     assert_response(:success)
