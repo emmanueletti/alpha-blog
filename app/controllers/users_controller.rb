@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         format.html { redirect_to user_path(@user) }
       else
-        render 'new'
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
