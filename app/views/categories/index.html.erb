@@ -11,6 +11,7 @@
         <%= link_to 'Edit', edit_category_path(category.id), class: "btn btn-outline-info" %>
         <%= button_to 'Delete', category_path(category.id), method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
       </div>
+      <div class="card-text"><%= pluralize(category.articles.count, "Article") %> </div>
     </div>
     <div class="card-footer text-muted">
       <small>Created <%= time_ago_in_words(category.created_at) %>, edited <%= time_ago_in_words(category.updated_at) %></small>
