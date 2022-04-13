@@ -1,4 +1,3 @@
-  
 <h1 class="text-center" >Create New Article</h1>
 <%= render "shared/errors" %>
 <%# using RAILS built in abstraction for forms (...wow!) %>
@@ -23,6 +22,14 @@
     <%= field.label :description, class: "col-sm-2 col-form-label" %>
     <div class="col-10">
       <%= field.text_area :description, size: "70x5", class:"form-control", placeholder: "Description" %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <%= field.label :category, class: "col-sm-2 col-form-label" %>
+    <div class="col-10">
+      <%= field.collection_select(:category_ids, Category.all, :id, :name, 
+                                  {prompt: "Please select a category (can be empty)"}, 
+                                  {multiple: true, class: "custom-select rounded"}) %>
     </div>
   </div>
   <div class="mb-3">

@@ -16,6 +16,12 @@ auto populate the fields with the particle id passed in from the route params %>
     </div>
   </div>
   <div class="mb-3">
+    <%= field.label :category, class: "col-sm-2 col-form-label" %>
+    <div class="col-10">
+      <%= field.collection_select(:category_ids, Category.all, :id, :name) %>
+    </div>
+  </div>
+  <div class="mb-3">
     <div class="col-sm-10">
       <%# NOTE field.submit does not use a comma to seperate the class %>
       <%# a comma will cause an error %>

@@ -58,7 +58,7 @@ class ArticlesController < ApplicationController
     # will use the below code, which says
     # require the top level key of :article, then permit the :title and :description
     # values from that key to be used in instantiating the Article object
-    @article = Article.new(params.require(:articles).permit(:title, :description))
+    @article = Article.new(article_params)
 
     @article.user = current_user
 
@@ -101,7 +101,7 @@ class ArticlesController < ApplicationController
     # @article = Article.find(params[:id])
 
     # whitelist and use the fields we need
-    result = @article.update(params.require(:article).permit(:title, :description))
+    result = @article.update(article_params)
 
     if result
       flash[:notice] = 'Article was edited successfully'
@@ -119,6 +119,12 @@ class ArticlesController < ApplicationController
 
   # anything below this "private" label will only be accessible inside this class
   private
+
+  def article_params
+    # not sure why category_ids is initialized to an empty array in the whitelisting
+    # do know that we want to pass an an array to the create action (even if it is empty) since relationship is many to many
+    params.require(:articles).permit(:title, :description, category_ids: [])
+  end
 
   # creating a reuseable method to re-use logic
   def find_article_by_param_id
