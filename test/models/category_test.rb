@@ -12,6 +12,7 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'name should be present' do
+    # update the name property
     @category.name = ' '
     # assert that the category gets invalidated due to the lack of a proper name
     assert_not(@category.valid?)

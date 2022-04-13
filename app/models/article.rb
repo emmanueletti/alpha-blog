@@ -7,7 +7,9 @@
 # can be created using this class
 class Article < ApplicationRecord
   belongs_to :user
-  
+  has_many :article_categories
+  has_many :categories, through: :article_categories
+
   # Rails validation syntax to add contraints to the creation of new article
   # records in the database
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }

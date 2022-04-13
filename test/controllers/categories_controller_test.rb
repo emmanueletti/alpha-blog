@@ -9,14 +9,14 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    get categories_url
+    get(categories_url)
     assert_response :success
   end
 
   test 'should get new' do
     # method defined in test_helper.rb
     sign_in_as(@admin_user)
-    get new_category_url
+    get(new_category_url)
     assert_response :success
   end
 
@@ -24,20 +24,20 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@admin_user)
     assert_difference('Category.count', 1) do
       # post categories_url, params: { category: { name: 'Travel' } }
-      post categories_url, params: { name: 'Travel' }
+      post(categories_url, params: { name: 'Travel' })
     end
 
     assert_redirected_to category_url(Category.last)
   end
 
   test 'should show category' do
-    get category_url(@category)
+    get(category_url(@category))
     assert_response :success
   end
 
   test 'should not show category if not admin' do
     assert_no_difference('Category.count') do
-      post categories_url, params: { name: 'Travel' }
+      post(categories_url, params: { name: 'Travel' })
     end
 
     assert_redirected_to(categories_url)
