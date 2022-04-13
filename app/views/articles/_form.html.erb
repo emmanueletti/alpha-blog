@@ -2,7 +2,9 @@
 <%# RAILS magic, it knows that we are in the edit form of an edit route in an
 edit action, so by just telling it the model we are working with, RAILS will
 auto populate the fields with the particle id passed in from the route params %>
-<%= form_with(model: @article, local: true)  do |field| %>
+<%# scope parameter will have the params be sent within a scoped object with the name given %>
+<%# thus, the white listing process of "params.require(:SCOPE_NAME).permit(:title, :description, category_ids: [])" works %>
+<%= form_with(model: @article, scope: :articles, local: true)  do |field| %>
   <div class="mb-3">
     <%= field.label :title, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-10">
@@ -15,11 +17,10 @@ auto populate the fields with the particle id passed in from the route params %>
       <%= field.text_area :description, size: "70x5", class:"form-control", placeholder: "Description of article" %>
     </div>
   </div>
-  <div class="mb-3">
-    <%= field.label :category, class: "col-sm-2 col-form-label" %>
-    <div class="col-10">
-      <%= field.collection_select(:category_ids, Category.all, :id, :name) %>
-    </div>
+  <div class="col-10">
+    <%= field.collection_select(:category_ids, Category.all, :id, :name, 
+                                  {prompt: "Please select a category (can be empty)"}, 
+                                  {multiple: true, class: "custom-select rounded"}) %>
   </div>
   <div class="mb-3">
     <div class="col-sm-10">

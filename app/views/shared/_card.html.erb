@@ -1,6 +1,15 @@
 <div class="card text-center m-4 shadow mb-5 bg-body rounded">
   <div class="card-header font-italic">
-    <%= article_data.user.username %>
+    <div><%= article_data.user.username %></div>
+    <% if @article.categories.any? %>
+      <%# instead of doing a manual iteration through the articles.categories 
+       and displaying an html element for each category item
+       Rails has a shorthand for this %>
+      <%# the below tells rails to loop through the items in the article.cateogires array 
+       then look for a "category" partial and render that category item %>
+      <%# Rails also knows to check the category folder for the correct partial %>
+      <%= render @article.categories %>
+    <% end %>
   </div>
   <div class="card-body">
     <%# RAILS MAGIC: helper function to do some simple formating  %>
